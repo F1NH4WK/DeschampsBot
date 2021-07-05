@@ -5,6 +5,7 @@ import informations
 import re
 
 def read():
+    val = 0
     joined = im.IMAP4_SSL('imap.gmail.com')
     joined.login(informations.user,informations.password)
     joined.select('INBOX')
@@ -52,6 +53,14 @@ def read():
             b = c[0:len(c) - len(' Link Patrocinado')]
             messages.append(b)
             final.pop()
+        
+        for i,j in enumerate(titles):
+            if len(j) > 256:
+                try:
+                    titles.pop(i)
+                    final.pop(i)
+                    val += 1
+                except:
+                    pass
 
-        return final, titles, messages, links
- 
+    return final, titles, messages, links, val

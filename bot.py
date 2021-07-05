@@ -18,7 +18,7 @@ async def noticias():
     print('Rodou o loop')
     try:
         servers = bdnoticias()
-        x, y, z, w = read()
+        x, y, z, w, val = read()
         print('Notícias encontradas!')
         for i in servers:
             channel = client.get_channel(i[1]['canal'])
@@ -32,7 +32,7 @@ async def noticias():
 
             for c, b in enumerate(z):
                 embed = discord.Embed(
-                title = f'{y[a+c+1]}',
+                title = f'{y[a+c+1 - val]}',
                 colour = 16643584
                 )
                 embed.description = f'{b}'
@@ -67,7 +67,7 @@ async def help(ctx):
     )
     embed.add_field(name = 'f!definir (idcanal)', value= 'Define o canal para o envio das notícias.', inline=False)
     embed.add_field(name = 'f!canal', value = 'Verifica o canal em que as notícias serão postadas.', inline=False)
-    embed.add_field(name = 'Notícias', value = 'São enviadas automaticamente de segunda à sexta.', inline=False)
+    embed.add_field(name = 'Notícias', value = 'São enviadas automaticamente de segunda à sexta. Em alguns casos algumas mensagens podem ser apagadas devido ao limite de caractéres do discord.', inline=False)
 
     await client.get_channel(ctx.channel.id).send(embed = embed)
 
