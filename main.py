@@ -63,4 +63,4 @@ def read():
                 except:
                     pass
 
-    return final, titles, messages, links, val
+        return final, titles, messages, links, val
