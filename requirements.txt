@@ -1,0 +1,9 @@
+discord.py
+firebase-admin
+bs4
+beautifulsoup4
+credentials
+firebase
+lxml
+html5lib
+requests

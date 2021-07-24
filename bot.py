@@ -29,19 +29,17 @@ async def noticias():
                     )
                 embed.description = f'{b}'
                 await channel.send(embed = embed)
+
+            for c, b in enumerate(z):
+                embed = discord.Embed(
+                    title = f'{y[a+c+1 - val]}',
+                    colour = 16643584
+                    )
+                embed.description = f'{b}'
+                embed.description += f' [Link Afiliado]({w[c]})'
+                await channel.send(embed = embed)
     except:
-        print('Erro encontrado nas noticias')
-    try:
-        for c, b in enumerate(z):
-            embed = discord.Embed(
-                title = f'{y[a+c+1 - val]}',
-                colour = 16643584
-                )
-            embed.description = f'{b}'
-            embed.description += f' [Link Afiliado]({w[c]})'
-            await channel.send(embed = embed)
-    except:
-        print('Erro encontrado na hora de mandar links.')
+        print('Erro no envio de notícias')
 
 @client.command()
 async def canal(ctx):
