@@ -1,6 +1,5 @@
 import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
+from firebase_admin import credentials, firestore
 
 cred = credentials.Certificate('deschamps_bd.json')
 firebase_admin.initialize_app(cred)
@@ -25,6 +24,5 @@ def bdnoticias():
         temp.append(i.id)
         temp.append(i.to_dict())
         dados.append(temp[:])
-        temp.clear()
 
     return dados

@@ -22,7 +22,7 @@ def read():
 #   TBH, IDK EXACTLY WHAT THIS REGEX DO, BUT IT WORKS :)
         url = re.findall(regex, str(soup))
 
-#   ADDING LINKS TO LIST
+#   ADDING LINKS TO A LIST
         for x,y in enumerate(url):
             for a,b in enumerate(y):
                 if not b == '':
@@ -38,7 +38,8 @@ def read():
         for c in range(1, len(soup.find_all('p'))):
             utf = quopri.decodestring(soup.find_all('p')[c].text)
             messages.append(utf.decode('utf-8'))
-            
+
+#   HERE, I SEPARATE THE MESSAGES FROM TITLE       
         for c in messages:
             for x,y in enumerate(c):
                 if y == ':':
@@ -49,18 +50,22 @@ def read():
 
         messages.clear()
 
-        for c in final[len(final)-2: ]:
-            b = c[0:len(c) - len(' Link Patrocinado')]
-            messages.append(b)
-            final.pop()
-        
-        for i,j in enumerate(titles):
-            if len(j) > 256:
-                try:
-                    titles.pop(i)
-                    final.pop(i)
-                    val += 1
-                except:
-                    pass
+        x = 'Link Afiliado'
+        x2 = 'Link Patrocinado'
 
-        return final, titles, messages, links, val
+        cont = 0
+        for num, i in enumerate(final):
+            if x in i:
+                i = i.replace('Link Afiliado', f'[Link Afiliado]({links[cont]})')
+                cont += 1
+                messages.append(i)
+
+            elif x2 in i:
+                i = i.replace('Link Patrocinado', f'[Link Patrocinado]({links[cont]}')
+                cont += 1
+                messages.append(i)
+
+        for b in range(cont):
+            final.pop()
+
+        return final, titles, messages
