@@ -11,7 +11,7 @@ def read():
     joined.select('INBOX')
     status, data = joined.search(None, 'FROM', "'newsletter'", "(UNSEEN)")
 
-    links = []
+    links, messages, titles, final = [], [], [], []
 
 #   GETTING THE LINKS
     for c in data[0].split():
@@ -32,9 +32,7 @@ def read():
             if x == 1:
                 break
 
-        messages,titles, final = [], [], []
         soup = BeautifulSoup(markup=email_msg, features='lxml')
-
         for c in range(1, len(soup.find_all('p'))):
             utf = quopri.decodestring(soup.find_all('p')[c].text)
             messages.append(utf.decode('utf-8'))
@@ -42,7 +40,7 @@ def read():
 #   HERE, I SEPARATE THE MESSAGES FROM TITLE       
         for c in messages:
             for x,y in enumerate(c):
-                if y == ':':
+                if y == ':' or y == '!' or y == '?':
                     fim = x+1
                     titles.append(c[:fim])
                     final.append(c[fim:])
@@ -61,7 +59,7 @@ def read():
                 messages.append(i)
 
             elif x2 in i:
-                i = i.replace('Link Patrocinado', f'[Link Patrocinado]({links[cont]}')
+                i = i.replace('Link Patrocinado', f'[Link Patrocinado]({links[cont]})')
                 cont += 1
                 messages.append(i)
 
