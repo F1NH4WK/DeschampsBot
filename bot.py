@@ -32,17 +32,14 @@ async def noticias():
                 embed = discord.Embed(
                     title = f'{titles[a]}',
                     colour = 16643584
-                    )
+                )
                 last_ocurrence = a+1
 
             for a,b in enumerate(messages):
                 embed = discord.Embed(
                     title = f'{titles[last_ocurrence + a]}',
-                    colour = 16643584,
-                    timestamp = datetime.datetime 
+                    colour = 16643584
                 )
-                embed.description = f'{b}'
-                discord.Embed.set_footer(self = embed, text= 'Deschamps', icon_url= 'https://cdn.discordapp.com/avatars/852604893718118461/90c0563d288758efdd661e40b13a65b5.png?size=2048')
                 await channel.send(embed=embed)
 
     except TypeError:
