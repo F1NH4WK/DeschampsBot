@@ -3,7 +3,6 @@ from main import read
 from discord.ext import commands, tasks
 import informations
 import datetime
-<<<<<<< HEAD
 from bd import bddefinir, bdreceber, bdnoticias, bdremover
 
 #BOT
