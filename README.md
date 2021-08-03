@@ -1,9 +1,7 @@
 ![bot](https://img.shields.io/badge/DESCHAMPS-BOT-brightgreen)
 
 <h2>Is a discord bot that sends news, provided by Filipe Deschamps' Newsletter, to discord.<h2>
-
 <h3>All the videos i used:</h3>
-       
   Imaplib: 
   https://www.youtube.com/watch?v=wm82gDsKN0E&t=813s
 
