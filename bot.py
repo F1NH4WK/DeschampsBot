@@ -5,9 +5,6 @@ import informations
 import datetime
 <<<<<<< HEAD
 from bd import bddefinir, bdreceber, bdnoticias, bdremover
-=======
-from bd import bddefinir, bdreceber, bdnoticias
->>>>>>> a2bab3895a9645299d42d1f2167190d29d4c8bed
 
 #BOT
 client = commands.Bot(command_prefix= 'f!', help_command=None, owner_id = 666280091713536010)
@@ -18,15 +15,11 @@ async def on_ready():
     print('ONLINE')
     await client.change_presence(status = discord.Status.online,  activity = discord.Activity(type = discord.ActivityType.watching, name = 'Felipe Deschamps - (Prefixo: f!)'))
 
-<<<<<<< HEAD
 @client.event
 async def on_command_completion(ctx):
     await ctx.message.add_reaction('<:correct:870839662963490866>')
 
-@tasks.loop(seconds= 120)   
-=======
-@tasks.loop(seconds= 60)   
->>>>>>> a2bab3895a9645299d42d1f2167190d29d4c8bed
+@tasks.loop(seconds= 120) 
 async def noticias():
     print('Rodou o loop')
     try:
@@ -39,17 +32,8 @@ async def noticias():
             for a,b in enumerate(final):
                 embed = discord.Embed(
                     title = f'{titles[a]}',
-<<<<<<< HEAD
                     colour = 16643584
-=======
-                    colour = 16643584,
-                    timestamp = datetime.datetime.now(datetime.timezone.utc) 
->>>>>>> a2bab3895a9645299d42d1f2167190d29d4c8bed
                     )
-                embed.description = f'{b}'
-                discord.Embed.set_footer(self = embed, text= 'Deschamps', icon_url= 'https://cdn.discordapp.com/avatars/852604893718118461/90c0563d288758efdd661e40b13a65b5.png?size=2048')
-                await channel.send(embed = embed)
-
                 last_ocurrence = a+1
 
             for a,b in enumerate(messages):
@@ -64,7 +48,6 @@ async def noticias():
 
     except TypeError:
         print('Não há notícias a serem enviadas')
-<<<<<<< HEAD
 
     except AttributeError:
         guilds = client.guilds
@@ -77,8 +60,6 @@ async def noticias():
             if removed:
                 bdremover(b[0])
                 print(f'Servidor {b[0]} removido')
-=======
->>>>>>> a2bab3895a9645299d42d1f2167190d29d4c8bed
 
 @client.command()
 @commands.has_permissions(administrator = True)
@@ -117,8 +98,6 @@ async def definir_error(ctx, error):
 @client.command()
 async def help(ctx):
     embed = discord.Embed(
-<<<<<<< HEAD
-=======
         title = 'Comandos',
         description = 'Comandos Deschamps Bot',
         colour = 16643584
@@ -128,28 +107,5 @@ async def help(ctx):
     embed.add_field(name = 'Notícias', value = 'São enviadas automaticamente de segunda à sexta. Em alguns casos algumas mensagens podem ser apagadas devido ao limite de caractéres do discord.', inline=False)
 
     await client.get_channel(ctx.channel.id).send(embed = embed)
-
-@client.command()
-async def teste(ctx):
-    embed = discord.Embed(
->>>>>>> a2bab3895a9645299d42d1f2167190d29d4c8bed
-                    title = ':scroll: • Lista de commandos',
-                    colour = 16643584,
-                    description = 'Prefixo do bot: `f!`',
-                    timestamp = datetime.datetime.now(datetime.timezone.utc)
-                )
-<<<<<<< HEAD
-    discord.Embed.set_footer(self = embed, text= ctx.author.name, icon_url= ctx.author.avatar_url)
-    embed.add_field(name = '<:seta:870841486755909702> Definir canal de notícias:', value= '`f!definir idcanal`', inline=False)
-    embed.add_field(name = '<:seta:870841486755909702> Ver em que canal as notícias serão enviadas:', value = '`f!canal`', inline=False)
-    embed.add_field(name = '<:seta:870841486755909702> Sobre as notícias:', value = '`São enviadas de segunda à sexta, às 11h. Em alguns casos, a notícia ultrapassa o limite de caractéres do Discord, então ela não é enviada aqui.`', inline=False)    
-    await ctx.send(embed = embed)
-=======
-    # discord.Embed.set_footer(self = embed, text= ctx.author.name, icon_url= ctx.author.avatar_url)
-    # embed.add_field(name = '• Definir canal de notícias', value= '`f!definir idcanal`', inline=False)
-    # embed.add_field(name = '• Ver em que canal as notícias serão enviadas', value = '`f!canal`', inline=False)
-    # embed.add_field(name = '• Sobre as notícias', value = '`São enviadas de segunda à sexta, geralmente entre 11h e 12h.`', inline=False)    
-
->>>>>>> a2bab3895a9645299d42d1f2167190d29d4c8bed
 
 client.run(informations.token)
