@@ -57,13 +57,10 @@ def read():
                 cont += 1
                 messages.append(i)
 
-<<<<<<< HEAD
             elif x in i:
                 i = i.replace('Link', f'[Link]({links[cont]})')
-=======
             elif x2 in i:
                 i = i.replace('Link Patrocinado', f'[Link Patrocinado]({links[cont]})')
->>>>>>> a2bab3895a9645299d42d1f2167190d29d4c8bed
                 cont += 1
                 messages.append(i)
 
