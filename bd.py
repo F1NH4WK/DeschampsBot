@@ -1,8 +1,7 @@
 import firebase_admin
 from firebase_admin import credentials, firestore
 
-cred = credentials.Certificate('deschamps_bd.json')
-firebase_admin.initialize_app(cred)
+firebase_admin.initialize_app(credentials.Certificate('deschamps_bd.json'))
 db = firestore.client()
 
 def bddefinir(nome, canal):
@@ -24,5 +23,10 @@ def bdnoticias():
         temp.append(i.id)
         temp.append(i.to_dict())
         dados.append(temp[:])
+        temp.clear()
 
     return dados
+
+def bdremover(server):
+    db.collection(u'Discord').document(server).delete()
+    return f'O servidor {server} foi removido com sucesso!'
