@@ -57,13 +57,6 @@ def read():
                 cont += 1
                 messages.append(i)
 
-            elif x in i:
-                i = i.replace('Link', f'[Link]({links[cont]})')
-            elif x2 in i:
-                i = i.replace('Link Patrocinado', f'[Link Patrocinado]({links[cont]})')
-                cont += 1
-                messages.append(i)
-
         for b in range(cont):
             final.pop()
 
