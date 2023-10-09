@@ -1,0 +1,31 @@
+{
+  "name": "deschampsbot",
+  "version": "1.0.0",
+  "description": "Um simples bot open-source desenvolvido para compartilhar a newsletter do Filipe Deschamps no discord! ",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/F1NH4WK/DeschampsBot.git"
+  },
+  "keywords": [
+    "discord-bot",
+    "filipe-deschamps",
+    "newsletter"
+  ],
+  "author": "Finhawk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/F1NH4WK/DeschampsBot/issues"
+  },
+  "homepage": "https://github.com/F1NH4WK/DeschampsBot#readme",
+
+  "dependencies": {
+    "discord.js": "^14.13.0",
+    "dotenv": "^16.3.1",
+    "mongodb": "^6.1.0"
+  }
+}
