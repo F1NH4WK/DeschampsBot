@@ -13,8 +13,7 @@ const client = new Client({
 		name: 'Filipe Deschamps', 
 		type: ActivityType.Watching, 
 		}]
-	},
-	
+	}
 })
 
 client.on(Events.InteractionCreate , async (event) => {
@@ -25,9 +24,6 @@ client.on(Events.InteractionCreate , async (event) => {
 		await runSelectChannel(event)
 	}
 });
-
-
-
 
 client.once(Events.ClientReady, async () => await registerCommands())
 client.login(process.env.DISCORD_TOKEN)

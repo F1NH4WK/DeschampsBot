@@ -31,7 +31,7 @@ export async function runSelectChannel(event : Interaction<CacheType>){
         // I would really apreciate if someone changes this any type.
 
         const reply = await event.reply({components: [actionsRow]})
-
+    
         const answer = reply.createMessageComponentCollector({
             componentType: ComponentType.ChannelSelect,
             filter: (i) => i.user.id === event.user.id && i.customId === event.id,
@@ -42,7 +42,8 @@ export async function runSelectChannel(event : Interaction<CacheType>){
             const CHANNEL_ID = interaction.values.join('')
             const GUILD_ID = event.guild.id
 
-            insertIntoDB(GUILD_ID, CHANNEL_ID)
+            await reply.delete()
+            await insertIntoDB(GUILD_ID, CHANNEL_ID)
             // Storing it in database
 
             await interaction.reply({
