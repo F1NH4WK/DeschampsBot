@@ -1,31 +1,22 @@
 import { REST, Routes } from "discord.js";
 import { config } from 'dotenv'
+import { selectChannel } from "./selectChannel.js";
 
 config()
 
 const rest = new REST({ version: '10'}).setToken(process.env.DISCORD_TOKEN)
 
-const test = [{
-    'name': 'ping',
-    'description': 'Test'
-},
-{
-    'name': 'ping2',
-    'description': 'Test2'
-}
-]
-
 export default async function registerCommands(){
     try {
         await rest.put(
             Routes.applicationCommands(process.env.CLIENT_ID),
-            { body: test }
+            { body: [selectChannel] }
         )
 
-        console.log('Slash commands updated!')
+        console.log('All slash commands updated!')
     }
     
     catch(ex){
-        console.log(ex)
+        console.log('There was a problem updating slash commands: ', ex)
     }
 }
