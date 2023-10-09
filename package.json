@@ -4,9 +4,8 @@
   "description": "Um simples bot open-source desenvolvido para compartilhar a newsletter do Filipe Deschamps no discord! ",
   "main": "index.js",
   "type": "module",
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc && node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -23,10 +22,12 @@
     "url": "https://github.com/F1NH4WK/DeschampsBot/issues"
   },
   "homepage": "https://github.com/F1NH4WK/DeschampsBot#readme",
-
   "dependencies": {
     "discord.js": "^14.13.0",
     "dotenv": "^16.3.1",
     "mongodb": "^6.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
   }
 }

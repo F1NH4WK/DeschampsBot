@@ -11,10 +11,8 @@ async function run(){
     try {
 
         await client.connect()
-
         const servers = await client.db('Servers').collections() // Listing all servers
-        
-        
+
         }
     catch(ex){
         console.log(ex)
@@ -23,5 +21,3 @@ async function run(){
         await client.close();
     }
 }
-
-run()
