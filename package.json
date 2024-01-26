@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "test": "node --watch"
+    "test": "node --watch src/index.js"
   },
   "repository": {
     "type": "git",
