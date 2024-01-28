@@ -6,7 +6,6 @@ config() // Starting dotenv
 const uri = process.env.MONGO_DB_SECRET
 const client = new MongoClient(uri) // starting mongodb
 
-
 export async function insertIntoDB(GUILD_ID, CHANNEL_ID){
 
     await client.connect()

@@ -1,7 +1,7 @@
 import { ActivityType, Client, Events, GatewayIntentBits, PresenceUpdateStatus } from "discord.js";
 import { config } from 'dotenv'
-import registerCommands from "./commands/registerCommands.js";
-import { runSelectChannel } from "./commands/selectChannel.js";
+import { CommandKit } from "commandkit";
+import path from 'path'
 
 config()
 
@@ -14,17 +14,14 @@ const client = new Client({
 		type: ActivityType.Watching, 
 		}]
 	},
-	
 })
 
-client.on(Events.InteractionCreate , async (event) => {
-	if (!event.isChatInputCommand()) return
 
-	if (event.commandName == 'escolhercanal'){
-		await runSelectChannel(event)
-	}
-});
+new CommandKit({
+	client,
+	commandsPath: path.join(process.cwd(), 'src/commands'),
+	validationsPath: path.join(process.cwd(), 'src/validations')
+})
 
-
-client.once(Events.ClientReady, async () => await registerCommands())
+client.once(Events.ClientReady, (client) => console.log(`${client.user.tag} is online!`))
 client.login(process.env.TOKEN)

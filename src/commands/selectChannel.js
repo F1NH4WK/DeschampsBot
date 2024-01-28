@@ -1,25 +1,21 @@
+import { insertIntoDB } from "../database/database.js"
 import { 
     ChannelSelectMenuBuilder, ChannelType,
     ActionRowBuilder, ComponentType
     
 } from "discord.js";
-import { insertIntoDB } from "../database/database.js";
 
-export const selectChannel = {
-    name: 'escolhercanal',
-    description: 'Escolha um canal para as noticias serem enviadas. Recomenda-se um canal dedicado.',
-    type: 1
-} // The selection channel slash command name and description
+export const data = {
+    name: 'selecionarcanal',
+    description: 'Escolha um canal para as noticias serem enviadas. Recomenda-se um canal dedicado.'
+}
 
-export async function runSelectChannel(event){
-
-    if (!event.isChatInputCommand()) return // Doing it to being able do reply
-    
+export async function run ({ interaction, client, handler }){
     try{
 
         const selectMenu = 
         new ChannelSelectMenuBuilder({
-            custom_id: event.id,
+            custom_id: interaction.id,
             channel_types: [ChannelType.GuildText],
             max_values: 1,
             minValues: 0,
@@ -29,24 +25,29 @@ export async function runSelectChannel(event){
         
         const actionsRow = new ActionRowBuilder().setComponents(selectMenu)
         
-        const reply = await event.reply({components: [actionsRow]})
+        const reply = await interaction.reply({
+            content: 'Aqui está a lista de canais que tenho acesso:',
+            components: [actionsRow], 
+            ephemeral: true
+        })
 
         const answer = reply.createMessageComponentCollector({
             componentType: ComponentType.ChannelSelect,
-            filter: (i) => i.user.id === event.user.id && i.customId === event.id,
+            filter: (i) => i.user.id === interaction.user.id && i.customId === interaction.id,
             time: 30_000,
         }) // Handling the user's selected channel
 
         answer.on('collect', async (interaction) => {
             const CHANNEL_ID = interaction.values.join('')
-            const GUILD_ID = event.guild.id
+            const GUILD_ID = interaction.guild.id
 
-            insertIntoDB(GUILD_ID, CHANNEL_ID)
+            await insertIntoDB(GUILD_ID, CHANNEL_ID)
             // Storing it in database
 
             await interaction.reply({
                 content: `Delicinha! A newsletter será enviada no canal <#${CHANNEL_ID}>.`,
                 ephemeral: true,
+                
             })
         })
     }
@@ -54,4 +55,9 @@ export async function runSelectChannel(event){
     catch(ex){
         console.log(ex)
     }
+}
+
+export const options = {
+    userPermissions: ['Administrator'],
+    botPermissions: ['Administrator']
 }
