@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "test": "node --watch src/index.js"
+    "test": "node --watch src/index.js",
+    "register": "node src/utils/api/register_commands.js"
   },
   "repository": {
     "type": "git",
