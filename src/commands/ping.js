@@ -1,13 +1,13 @@
-export const data = {
-    name: 'ping',
-    description: 'Pong'
+import { SlashCommandBuilder } from "discord.js";
+
+const ping = {
+    data: new SlashCommandBuilder()
+        .setName('ping')
+        .setDescription('pong'),
+
+    execute: async (interaction) => {
+        await interaction.reply('Pong!')
+    }
 }
 
-export function run({ interaction, client, handler }){
-    interaction.reply(`${client.user.tag}`);
-}
-
-export const options = {
-    userPermissions: ['Administrator'],
-    botPermissions: ['Administrator']
-}
+export default ping

@@ -1,7 +1,10 @@
-import { ActivityType, Client, Events, GatewayIntentBits, PresenceUpdateStatus } from "discord.js";
+import { ActivityType, Client, Collection, Events, 
+	GatewayIntentBits, PresenceUpdateStatus } from "discord.js";
 import { config } from 'dotenv'
-import { CommandKit } from "commandkit";
-import path from 'path'
+import ping from "./commands/ping.js";
+import selectChanel from './commands/selectChannel.js'
+import ready from "./events/ready.js";
+import interactionCreate from "./events/InteractionCreate.js";
 
 config()
 
@@ -11,17 +14,17 @@ const client = new Client({
 		status:PresenceUpdateStatus.Online,
 		activities: [{
 		name: 'Filipe Deschamps', 
-		type: ActivityType.Watching, 
+		type: ActivityType.Watching
 		}]
-	},
+	}
 })
 
+client.commands = new Collection([
+	['ping', ping],
+	['selecionarcanal', selectChanel]
+])
 
-new CommandKit({
-	client,
-	commandsPath: path.join(process.cwd(), 'src/commands'),
-	validationsPath: path.join(process.cwd(), 'src/validations')
-})
+client.on(Events.InteractionCreate, interactionCreate.execute)
+client.once(Events.ClientReady, ready.execute)
 
-client.once(Events.ClientReady, (client) => console.log(`${client.user.tag} is online!`))
 client.login(process.env.TOKEN)
