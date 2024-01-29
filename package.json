@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "test": "node --watch src/index.js",
-    "register": "node src/utils/api/register_commands.js"
+    "start-bot": "node --watch src/index.js",
+    "register-commands": "node src/utils/api/register_commands.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
   "dependencies": {
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.1",
-    "mongodb": "^6.3.0"
+    "mongodb": "^6.3.0",
+    "winston": "^3.11.0"
   }
 }

@@ -1,9 +1,10 @@
 import { Events } from "discord.js";
+import logger from "../log/logger.js";
 
 const ready = {
     name: Events.ClientReady,
     execute: (client) => {
-        console.log(`${client.user.tag} is ready!`)
+        logger.info(`${client.user.tag} is ready!`)
     }
 }
 

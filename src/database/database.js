@@ -1,5 +1,6 @@
 import { MongoClient } from 'mongodb'
 import { config } from 'dotenv'
+import logger from '../log/logger.js'
 
 config() // Starting dotenv
 
@@ -8,16 +9,27 @@ const client = new MongoClient(uri) // starting mongodb
 
 export async function insertIntoDB(GUILD_ID, CHANNEL_ID){
 
-    await client.connect()
-    const db = client.db('Servers')
-    const GUILD_DB = db.collection(GUILD_ID)
-    
-    const doc = {
-        CHANNEL_ID: CHANNEL_ID
-    }
+    try{
+        await client.connect()
+        const db = client.db('Servers')
+        const GUILD_DB = db.collection(GUILD_ID)
 
-    await GUILD_DB.insertOne(doc)
-    await client.close()
+        
+        const doc = {
+            CHANNEL_ID: CHANNEL_ID
+        }
+
+        await GUILD_DB.deleteMany({}) // Deleting eventuals channels, if so
+        await GUILD_DB.insertOne(doc)
+
+        logger.info(`A guilda ${GUILD_ID} teve o canal ${CHANNEL_ID} adicionado!`)
+        await client.close()
+
+        return true
+    }
+    catch (err){
+       return err
+    }
     
 }
 
@@ -31,19 +43,4 @@ export async function getAllServers(){ // THIS IS GOING TO NEED A PERFORMANCE UP
 
     await client.connect()
 
-}
-
-async function run(){
-    try {
-
-        await client.connect()
-        const servers = await client.db('Servers').collections() // Listing all servers
-
-        }
-    catch(ex){
-        console.log(ex)
-    }
-    finally{
-        await client.close();
-    }
 }

@@ -1,4 +1,6 @@
 import { SlashCommandBuilder, ActionRowBuilder, ChannelSelectMenuBuilder, ChannelType } from "discord.js"
+import { insertIntoDB } from "../database/database.js"
+import logger from "../log/logger.js"
 
 const selectChanel = {
     data: new SlashCommandBuilder()
@@ -19,25 +21,35 @@ const selectChanel = {
         const response = await interaction.reply({
             content: 'Aqui estão os canais disponíveis:',
             components: [row],
-            ephemeral: true
         })
 
-
+        const collectorFilter = i => i.user.id === interaction.user.id;
 
         try {
             const confirmation = await response.awaitMessageComponent({
-                time: 60_000
+                filter: collectorFilter,
+                time: 30_000
             })
 
-            
             const channel_id = confirmation.values.join('')
-            await confirmation.reply({ content: `Beleza! As noticias serão enviadas no canal <#${channel_id}>`, ephemeral: true})
-            await response.delete(delay = 10)
+            const guild_id = interaction.guild.id
 
+            const insertdb = await insertIntoDB(guild_id, channel_id)
+            
+            if (insertdb != true){
+                await confirmation.reply({ content: `Estamos com problemas em nosso servidor, tente novamente mais tarde...`})
+                logger.error(new Error(insertdb))
+                await interaction.deleteReply()
+            }
+            else {
+                await interaction.deleteReply()
+                await confirmation.reply({ content: `Beleza! As noticias serão enviadas no canal <#${channel_id}>!`})
+            }
         }   
         catch(ex){
-            await response.editReply({content: 'Parece que você não escolheu um canal :('});
-            await response.delete(delay = 5)
+            await interaction.followUp({content: 'Parece que você não escolheu um canal :('})
+            await interaction.deleteReply()
+            logger.error(new Error(ex))
         }
     }
 }

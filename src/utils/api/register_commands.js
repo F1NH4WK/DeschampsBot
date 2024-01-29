@@ -1,20 +1,19 @@
 import { REST, Routes } from "discord.js";
 import { config } from 'dotenv'
-import ping from '../../commands/ping.js'
 import selectChannel from '../../commands/selectChannel.js'
+import logger from "../../log/logger.js";
 
 config()
 
 const rest = new REST().setToken(process.env.TOKEN)
 
 const commands = new Array(
-    ping.data.toJSON(),
     selectChannel.data.toJSON()
 )
 
 async function registerCommands (){
     try {
-        console.log('Started refreshing commands!')
+        logger.info('Started refreshing commands!')
 
         await rest.put(
             Routes.applicationCommands(process.env.CLIENT_ID), 
@@ -22,12 +21,12 @@ async function registerCommands (){
         )
 
         for (const command of commands){
-            console.log('\x1b[36m%s\x1b[0m', `✅ - [${command.name}] slash command added!`)
+            logger.info(`✅ - [${command.name}] slash command added!`)
         }
     
     }
     catch(ex){
-        console.log(ex)
+        logger.error(ex)
     }
 };
 
