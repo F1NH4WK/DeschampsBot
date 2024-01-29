@@ -4,7 +4,7 @@ import { config } from 'dotenv'
 import ping from "./commands/ping.js";
 import selectChanel from './commands/selectChannel.js'
 import ready from "./events/ready.js";
-import interactionCreate from "./events/InteractionCreate.js";
+import interactionCreate from "./events/interactionCreate.js";
 
 config()
 
