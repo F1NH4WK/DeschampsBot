@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start-bot": "node --watch src/index.js",
-    "register-commands": "node src/utils/api/register_commands.js"
+    "bot": "node --watch src/index.js",
+    "register-commands": "node src/api/register_commands.js"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,7 @@
 import { SlashCommandBuilder, ActionRowBuilder, ChannelSelectMenuBuilder, ChannelType } from "discord.js"
 import { insertIntoDB } from "../database/database.js"
 import logger from "../log/logger.js"
+import embed from "../utils/generator/embedBuilder.js"
 
 const selectChanel = {
     data: new SlashCommandBuilder()
@@ -43,7 +44,7 @@ const selectChanel = {
             }
             else {
                 await interaction.deleteReply()
-                await confirmation.reply({ content: `Beleza! As noticias serão enviadas no canal <#${channel_id}>!`})
+                await confirmation.reply({ content: `Beleza! As noticias serão enviadas no canal <#${channel_id}>!`, embeds: [embed]})
             }
         }   
         catch(ex){

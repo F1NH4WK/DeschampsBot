@@ -1,12 +1,15 @@
 import { SlashCommandBuilder } from "discord.js";
+import embed from "../utils/generator/embedBuilder.js";
 
 const ping = {
     data: new SlashCommandBuilder()
-        .setName('ping')
+        .setName('embedtest')
         .setDescription('pong'),
 
     execute: async (interaction) => {
-        await interaction.reply('Pong!')
+        await interaction.reply({
+            embeds: [embed]
+        })
     }
 }
 
