@@ -4,6 +4,7 @@ import quopri
 import json
 from dotenv import load_dotenv
 import os
+from format_news import formatNews
 
 load_dotenv()
 email = os.getenv('EMAIL')

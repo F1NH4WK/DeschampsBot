@@ -7,6 +7,7 @@ config() // Starting dotenv
 const uri = process.env.MONGO_DB_SECRET
 const client = new MongoClient(uri) // starting mongodb
 
+
 export async function insertIntoDB(GUILD_ID, CHANNEL_ID){
 
     try{
@@ -39,8 +40,25 @@ export async function removeFromDB(GUILD_ID){
 
 }
 
-export async function getAllServers(){ // THIS IS GOING TO NEED A PERFORMANCE UPDATE
-
+export async function getAllServers(){ 
     await client.connect()
+    const db = client.db('Servers')
+    const a = await db.listCollections().toArray()
+    const sendInfo = []
 
+    for (const collection of a){
+        const guild_id = collection.name
+        let channel_id = await db.collection(guild_id).findOne({})
+        channel_id = channel_id.CHANNEL_ID
+
+
+        sendInfo.push({
+            guild_id,
+            channel_id
+        })
+    }
+
+    await client.close()
+
+    return sendInfo
 }
