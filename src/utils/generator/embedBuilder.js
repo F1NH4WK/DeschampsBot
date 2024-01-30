@@ -1,7 +1,7 @@
 import { EmbedBuilder, Colors } from "discord.js";
 import json from '../email/news.json' assert {type: 'json'};
 
-const news = json.news
+const news = json.data
 
 const embed = new EmbedBuilder()
     .setColor(Colors.Yellow)
