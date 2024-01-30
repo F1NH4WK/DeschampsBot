@@ -4,9 +4,6 @@ import quopri
 import json
 from dotenv import load_dotenv
 import os
-from schedule import repeat, every, run_pending
-import time
-from format_news import formatNews
 
 load_dotenv()
 email = os.getenv('EMAIL')
