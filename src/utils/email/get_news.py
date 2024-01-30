@@ -42,7 +42,6 @@ def arrayToJsonFormat(news_array: list):
         'data': news_formated_array
     }
 
-
 def writeToJsonFile(news_json):
     with open ('src/utils/email/news.json', 'w') as file:
         json.dump(news_json, file, ensure_ascii = False)

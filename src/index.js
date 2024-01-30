@@ -13,13 +13,11 @@ const client = new Client({
 	presence: { 
 		status:PresenceUpdateStatus.Online,
 		activities: [{
-		name: 'Filipe Deschamps', 
-		type: ActivityType.Watching
+			name: 'Filipe Deschamps', 
+			type: ActivityType.Watching
 		}]
 	}
 })
-
-
 
 client.commands = new Collection([
 	['embedtest', embedtest],
