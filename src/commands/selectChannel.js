@@ -44,7 +44,7 @@ const selectChanel = {
             }
             else {
                 await interaction.deleteReply()
-                await confirmation.reply({ content: `Beleza! As noticias serão enviadas no canal <#${channel_id}>!`, embeds: [embed]})
+                await confirmation.reply({ content: `Beleza! As noticias serão enviadas no canal <#${channel_id}>!`})
             }
         }   
         catch(ex){
