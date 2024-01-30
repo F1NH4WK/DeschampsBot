@@ -54,8 +54,8 @@ try:
     news_array = getDecodedArray(email_stream)
     news_json = arrayToJsonFormat(news_array)
     writeToJsonFile(news_json)
-
-    print("Noticias atualizadas no json!")
+    
+    print("Noticias atualizadas!")
 
 except IndexError:
     print('Não há emails!')

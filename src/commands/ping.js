@@ -1,16 +1,17 @@
 import { SlashCommandBuilder } from "discord.js";
 import embed from "../utils/generator/embedBuilder.js";
 
-const ping = {
+const embedtest = {
     data: new SlashCommandBuilder()
         .setName('embedtest')
-        .setDescription('pong'),
+        .setDescription('A'),
 
     execute: async (interaction) => {
         await interaction.reply({
+            content: '',
             embeds: [embed]
         })
     }
 }
 
-export default ping
+export default embedtest
