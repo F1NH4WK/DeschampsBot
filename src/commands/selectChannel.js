@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, ActionRowBuilder, ChannelSelectMenuBuilder, ChannelType } from "discord.js"
+import { SlashCommandBuilder, ActionRowBuilder, ChannelSelectMenuBuilder, ChannelType, PermissionFlagsBits } from "discord.js"
 import { insertIntoDB } from "../database/database.js"
 import logger from "../log/logger.js"
 import embed from "../utils/generator/embedBuilder.js"
@@ -6,7 +6,8 @@ import embed from "../utils/generator/embedBuilder.js"
 const selectChanel = {
     data: new SlashCommandBuilder()
         .setName('selecionarcanal')
-        .setDescription('Selecione um canal para as newsletter ser enviada!'),
+        .setDescription('Selecione um canal para a newsletter ser enviada!')
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
     execute: async (interaction) => {
         const select = new ChannelSelectMenuBuilder()
@@ -50,7 +51,7 @@ const selectChanel = {
         catch(ex){
             await interaction.followUp({content: 'Parece que você não escolheu um canal :('})
             await interaction.deleteReply()
-            logger.error(new Error(ex))
+            logger.error(ex)
         }
     }
 }
