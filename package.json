@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "bot": "node --watch src/index.js",
+    "bot": "node src/index.js",
     "register-commands": "node src/api/register_commands.js"
   },
   "repository": {

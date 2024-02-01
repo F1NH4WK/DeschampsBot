@@ -1,9 +1,9 @@
-import { EmbedBuilder, Colors} from "discord.js";
-import json from '../email/news.json' assert { type: 'json' };
+import { EmbedBuilder, Colors } from "discord.js";
 import logger from "../../log/logger.js";
-import path from 'node:path'
+import { PythonShell } from 'python-shell'
 
-const news = json.data
+const json = await PythonShell.run("src/utils/email/get_news.py")
+const news = JSON.parse(json[0]).data
 
 const embed = new EmbedBuilder()
     .setColor(Colors.Yellow)
@@ -22,12 +22,15 @@ for (const notice of news){
             value: notice.value,
         })
     }
+
     catch(err){
-        const jsonpath = path.join(process.cwd(), 'src/utils/email/news.json')
+
         logger.error(`There's one or more news exceeding discord characters limit, ignoring them... 
-        Check out the file: ${jsonpath}`)
+        Check out the file: ${news}`)
 
     }
 }
+
+logger.info('Noticias armazenadas no embed!')
 
 export default embed
