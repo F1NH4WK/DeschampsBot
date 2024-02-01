@@ -42,6 +42,7 @@ def arrayToJsonFormat(news_array: list):
         'data': news_formated_array
     }
 
+
 def writeToJsonFile(news_json):
     with open ('src/utils/email/news.json', 'w') as file:
         json.dump(news_json, file, ensure_ascii = False)
@@ -50,9 +51,8 @@ try:
     email_stream = getEmailStream()
     news_array = getDecodedArray(email_stream)
     news_json = arrayToJsonFormat(news_array)
-    writeToJsonFile(news_json)
-    
     print("Noticias atualizadas!")
+    writeToJsonFile(news_json)
 
 except IndexError:
     print('Não há emails!')

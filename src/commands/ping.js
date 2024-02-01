@@ -1,6 +1,7 @@
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 import embed from "../utils/generator/embedBuilder.js";
 import {PythonShell} from 'python-shell';
+import logger from "../log/logger.js";
 
 const embedtest = {
     data: new SlashCommandBuilder()
@@ -10,17 +11,22 @@ const embedtest = {
 
     execute: async (interaction) => {
 
+        const client = interaction.client
+        const channel = client.channels.cache.get('813143684136042526')
+        await channel.send('A')
+
         const getNews = async () => {
             PythonShell.run("src/utils/email/get_news.py").then(messages=>{
-                console.log(messages);
+    
+                logger.info(messages);
             });
         }
-
-        await getNews();
 
         await interaction.reply({
             content: 'testing out',
         })
+
+        
     }
 }
 

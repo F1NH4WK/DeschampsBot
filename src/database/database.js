@@ -38,7 +38,7 @@ export async function removeFromDB(GUILD_ID){
 
 }
 
-export async function getAllServers(){ 
+export async function getAllChannels(){ 
     await client.connect()
     
     const db = client.db('Servers')
@@ -50,10 +50,7 @@ export async function getAllServers(){
         let channel_id = await db.collection(guild_id).findOne({})
         channel_id = channel_id.CHANNEL_ID
 
-        sendInfo.push({
-            guild_id,
-            channel_id
-        })
+        sendInfo.push(channel_id)
     }
 
     await client.close()

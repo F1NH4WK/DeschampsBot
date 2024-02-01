@@ -43,6 +43,7 @@ const selectChanel = {
                 logger.error(new Error(insertdb))
                 await interaction.deleteReply()
             }
+            
             else {
                 await interaction.deleteReply()
                 await confirmation.reply({ content: `Beleza! As noticias serão enviadas no canal <#${channel_id}>!`})

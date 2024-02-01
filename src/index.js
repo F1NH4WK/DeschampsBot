@@ -9,7 +9,7 @@ import embedtest from "./commands/ping.js";
 config()
 
 const client = new Client({
-	intents: [GatewayIntentBits.GuildMessages], 
+	intents: [GatewayIntentBits.GuildMessages, GatewayIntentBits.Guilds], 
 	presence: { 
 		status:PresenceUpdateStatus.Online,
 		activities: [{
