@@ -2,7 +2,6 @@ import { REST, Routes } from "discord.js";
 import { config } from 'dotenv'
 import selectChannel from '../commands/selectChannel.js'
 import logger from "../log/logger.js";
-import ping from "../commands/ping.js";
 
 config()
 

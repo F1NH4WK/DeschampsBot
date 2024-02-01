@@ -4,7 +4,6 @@ import { config } from 'dotenv';
 import selectChanel from './commands/selectChannel.js'
 import ready from "./events/ready.js";
 import interactionCreate from "./events/interactionCreate.js";
-import embedtest from "./commands/ping.js";
 
 config()
 
@@ -20,7 +19,6 @@ const client = new Client({
 })
 
 client.commands = new Collection([
-	['embedtest', embedtest],
 	['selecionarcanal', selectChanel]
 ])
 
