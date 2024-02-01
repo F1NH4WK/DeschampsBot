@@ -1,1 +1,3 @@
 runs-on: self-hosted
+jobs:
+  - run: npm run bot
