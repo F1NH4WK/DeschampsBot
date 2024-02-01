@@ -50,5 +50,5 @@ try:
     # Sending json to javascript!
 
 except IndexError:
-    print(json.dumps({}))
+    print(json.dumps({'data': []}))
     # Sending an empty json to recognize no news
