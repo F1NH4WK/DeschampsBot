@@ -11,6 +11,7 @@ export default async function sendNews(clientCache){
     try{
         for (const channelID of channelsIDs){
             const channel = clientCache.get(channelID)
+            await channel.sendTyping();
             await channel.send({embeds: [embed]})   
 
             logger.info(`Newsletter enviada no canal: ${channelID}`)
