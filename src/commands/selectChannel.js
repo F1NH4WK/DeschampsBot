@@ -1,7 +1,6 @@
 import { SlashCommandBuilder, ActionRowBuilder, ChannelSelectMenuBuilder, ChannelType, PermissionFlagsBits } from "discord.js"
 import { insertIntoDB } from "../database/database.js"
 import logger from "../log/logger.js"
-import embed from "../utils/generator/embedBuilder.js"
 
 const selectChanel = {
     data: new SlashCommandBuilder()
