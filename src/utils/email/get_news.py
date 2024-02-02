@@ -2,11 +2,13 @@ from imaplib import IMAP4_SSL
 from bs4 import BeautifulSoup
 import quopri
 import json
+from dotenv import load_dotenv
 import os
 from format_news import formatNews
 
-email = 'botdeschamps@gmail.com'
-password = 'czra qfrn ztrz hzdc'
+load_dotenv()
+email = os.getenv('EMAIL')
+password = os.getenv('PASSWORD')
 
 def getEmailStream():
     try:
