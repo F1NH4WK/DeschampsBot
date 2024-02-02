@@ -1,5 +1,0 @@
-runs-on: self-hosted
-jobs:
-  - run: |
-    npm install
-    npm run bot

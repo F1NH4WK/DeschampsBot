@@ -23,7 +23,6 @@ export default async function getEmbed(){
     .setTimestamp(new Date().getTime())
     .setURL('https://filipedeschamps.com.br/newsletter')
     .setTitle('Inscreva-se na Newsletter!')
-    .setThumbnail('https://curso.dev/default-image-share.png')
 
     for (const notice of news){
 

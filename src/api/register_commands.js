@@ -8,7 +8,6 @@ config()
 const rest = new REST().setToken(process.env.TOKEN)
 
 const commands = new Array(
-    ping.data.toJSON(),
     selectChannel.data.toJSON()
 )
 
