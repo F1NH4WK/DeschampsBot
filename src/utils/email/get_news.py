@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 import os
 from format_news import formatNews
 
-
 load_dotenv()
 email = os.getenv('EMAIL')
 password = os.getenv('PASSWORD')
@@ -19,8 +18,6 @@ def getEmailStream():
 
             typ, data = M.fetch(msgID[0], '(BODY.PEEK[TEXT])')
             # Returns a tuple, the [0] is the body we're lf.
-
-           # print(data[0][1])
         return data[0][1]
 
     except:
