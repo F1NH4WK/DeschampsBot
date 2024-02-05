@@ -5,9 +5,9 @@ import { PythonShell } from 'python-shell'
 export default async function getEmbed(){
 
     const json = await PythonShell.run("src/utils/email/get_news.py")
-    const news = JSON.parse(json[0]).data
+    const news = JSON.parse(json[0])
 
-    if (news.length == 0) return null
+    if (news == {}) return null
     // Avoinding empty embed message
     
     const embed = new EmbedBuilder()
@@ -18,7 +18,8 @@ export default async function getEmbed(){
         url: 'https://curso.dev/'
     })
     .setFooter({
-        text: 'Delicinha!'
+        iconURL: 'https://yt3.googleusercontent.com/ytc/AIf8zZQqWLIMgm0a79oUAVIz3mRxAkdH-0F_1oMqhDEI=s900-c-k-c0x00ffffff-no-rj',
+        text: 'Filipe Deschamps Newsletter'
     })
     .setTimestamp(new Date().getTime())
     .setURL('https://filipedeschamps.com.br/newsletter')
@@ -31,14 +32,14 @@ export default async function getEmbed(){
         try{
             embed.addFields({
                 name: notice.title,
-                value: notice.value,
+                value: notice.content,
             })
         }
 
         catch(err){
-            logger.error(`There's one or more news exceeding discord characters limit, ignoring them... 
-            Check out the file: ${notice}`)
             error_news++
+            logger.info(`There's ${error_news} notice(s) exceding discord's characters limits`)
+            
 
             embed
                 .setFooter({text: `${error_news} notícia${error_news > 1? 's' : ''} não ${error_news > 1? 'puderam': 'pode'} ser ${error_news > 1? 'enviadas': 'enviada'}...`})
