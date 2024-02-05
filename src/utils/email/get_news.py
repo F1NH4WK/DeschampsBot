@@ -1,10 +1,10 @@
 from imaplib import IMAP4_SSL
-from bs4 import BeautifulSoup
 import quopri
 import json
 from dotenv import load_dotenv
 import os
-from format_news import formatNews
+from format_news import newsObject
+import quopri
 
 load_dotenv()
 email = os.getenv('EMAIL')
@@ -16,22 +16,16 @@ def getEmailStream():
             M = IMAP4_SSL(host='imap.gmail.com', port=993)
             M.login(email, password)
             M.select(mailbox = 'INBOX')
-            typ, data = M.search(None, '(UNSEEN)')
-            
-        for num in data[0].split():
-                typ, stream = M.fetch(num, '(RFC822)')
-        return stream[0][1]
+            typ, msgID = M.search(None, 'FROM', "'newsletter"', (UNSEEN)')
+
+            typ, data = M.fetch(msgID[0], '(BODY.PEEK[TEXT])')
+            # Returns a tuple, the [0] is the body we're lf.
+
+           # print(data[0][1])
+        return data[0][1]
 
     except:
         raise IndexError
-
-def getDecodedArray(email_stream):
-    news_array = []
-    soup = BeautifulSoup(email_stream, 'lxml')
-    for bstring in soup.find_all('p')[1:]:
-        bstring_encoded = quopri.decodestring(bstring.getText())
-        news_array.append(bstring_encoded.decode('utf-8'))
-    return news_array
 
 def arrayToJsonFormat(news_array: list):
     news_formated_array = []
@@ -43,10 +37,10 @@ def arrayToJsonFormat(news_array: list):
     }
 
 try:
-    email_stream = getEmailStream()
-    news_array = getDecodedArray(email_stream)
-    news_json = arrayToJsonFormat(news_array)
-    print(json.dumps(news_json, ensure_ascii = False))
+    encodedEmail = getEmailStream()
+    newsObject(encodedEmail)
+    #news_json = arrayToJsonFormat(news_array)
+    #print(json.dumps(news_json, ensure_ascii = False))
     # Sending json to javascript!
 
 except IndexError:

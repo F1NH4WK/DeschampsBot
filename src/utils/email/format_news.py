@@ -1,3 +1,5 @@
-def formatNews(news):
-    newsSplit = news.strip().split(':', 1)
-    return {'title': newsSplit[0] + ':', 'value': newsSplit[1].strip().capitalize()}
+from lxml import html
+import quopri
+
+def newsObject(encodedEmail):
+    html.document_fromstring(encodedEmail)
