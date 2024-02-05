@@ -17,7 +17,11 @@ def getEmailStream():
             typ, msgID = M.search(None, 'FROM', "'newsletter"', (UNSEEN)')
 
             typ, data = M.fetch(msgID[0], '(BODY.PEEK[TEXT])')
-            # Returns a tuple, the [0] is the body we're lf.
+
+            M.store(msgID[0].replace(b' ', b','), '+FLAGS', '\Seen')
+            # Since we're not using RFC822 protocol anymore, we need to set email as seen manually.
+
+
         return data[0][1]
 
     except:
@@ -31,5 +35,5 @@ try:
     # Sending json to javascript!
 
 except IndexError:
-    print(json.dumps({[]}))
+    print(json.dumps({}))
     # Sending an empty json to recognize there's no news
