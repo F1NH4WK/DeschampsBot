@@ -7,7 +7,7 @@ export default async function getEmbed(){
     const json = await PythonShell.run("src/utils/email/get_news.py")
     const news = JSON.parse(json[0])
 
-    if (news == {}) return null
+    if (news.length == undefined) return null
     // Avoinding empty embed message
     
     const embed = new EmbedBuilder()
@@ -39,7 +39,6 @@ export default async function getEmbed(){
         catch(err){
             error_news++
             logger.info(`There's ${error_news} notice(s) exceding discord's characters limits`)
-            
 
             embed
                 .setFooter({text: `${error_news} notícia${error_news > 1? 's' : ''} não ${error_news > 1? 'puderam': 'pode'} ser ${error_news > 1? 'enviadas': 'enviada'}...`})
