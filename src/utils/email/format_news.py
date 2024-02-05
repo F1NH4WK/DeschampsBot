@@ -16,17 +16,20 @@ def formatNews(encodedEmail):
 
    for index, title in enumerate(newsTitles):
       notice = newsContent[index].text_content()
-      notice = notice.replace(title.text_content(), '').capitalize().strip()
+      notice = notice.replace(title.text_content(), '')
       # Removing the title from notice, so we avoing sending it twice
 
       news.append({
          'title': title.text_content(),
-         'content': notice
+         'content': notice.strip().capitalize()
       })
 
    # Adding links to the last news
 
    for index, link in enumerate(reversed(newsLinks)):
-      news[-index - 1].update({'link': link.get('href')})
+      content = news[-index - 1]['content']
+      linkText = content.rsplit(':')[-1]
+      new_content = content.replace(linkText, f' [{linkText.strip().capitalize()}]({link.get("href")})')
+      news[-index - 1]['content'] = new_content
 
    return news
