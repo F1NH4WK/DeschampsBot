@@ -1,10 +1,9 @@
 from imaplib import IMAP4_SSL
-import quopri
 import json
 from dotenv import load_dotenv
 import os
-from format_news import newsObject
-import quopri
+from format_news import formatNews
+
 
 load_dotenv()
 email = os.getenv('EMAIL')
@@ -27,22 +26,13 @@ def getEmailStream():
     except:
         raise IndexError
 
-def arrayToJsonFormat(news_array: list):
-    news_formated_array = []
-    for index, news in enumerate(news_array):
-        news_formated = formatNews(news)
-        news_formated_array.append(news_formated)
-    return {
-        'data': news_formated_array
-    }
-
 try:
     encodedEmail = getEmailStream()
-    newsObject(encodedEmail)
-    #news_json = arrayToJsonFormat(news_array)
-    #print(json.dumps(news_json, ensure_ascii = False))
+    formatedNews = formatNews(encodedEmail)
+
+    print(json.dumps(formatedNews, ensure_ascii = False))
     # Sending json to javascript!
 
 except IndexError:
-    print(json.dumps({'data': []}))
-    # Sending an empty json to recognize no news
+    print(json.dumps({[]}))
+    # Sending an empty json to recognize there's no news
